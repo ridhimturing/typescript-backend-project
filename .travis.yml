@@ -1,20 +1,22 @@
 # .travis.yml for a TypeScript backend project
 
-language: node_js  # Specify the programming language
+language: node_js
 
 node_js:
-  - "14"  # You can change this to a version like 16 or 18 depending on your requirements
+  - "14"
 
 cache:
   directories:
-    - node_modules  # Cache node_modules to speed up build times
+    - node_modules
 
 install:
-  - npm install  # Install dependencies
+  - npm install
 
 script:
-  - npm run build  # Compile TypeScript code
-  - npm test      # Run tests using Jest
+  - npm run lint
+  - npm run build
+  - npm test
+  - npm run test:coverage
 
 # Optional: Set environment variables for the deployment
 env:
@@ -22,9 +24,4 @@ env:
 
 after_success:
   - echo "Build passed!"
-
-# Optional: Add a deploy step for continuous deployment
-# deploy:
-#   provider: heroku
-#   api_key: $HEROKU_API_KEY  # Use your secure Heroku API key
-#   app: your-app-name        # Replace with your Heroku app name
+  - codecov
