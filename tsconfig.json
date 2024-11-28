@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "ES6",                   // Set JavaScript target version
+      "module": "CommonJS",               // Set module system to CommonJS (for Node.js)
+      "strict": true,                     // Enable strict type checking options
+      "esModuleInterop": true,            // Allows import of CommonJS modules as ES6 modules
+      "skipLibCheck": true,               // Skip library type checks for faster builds
+      "forceConsistentCasingInFileNames": true, // Ensure consistent casing of file names
+      "outDir": "./dist"                  // Directory to output the compiled JavaScript files
+    },
+    "include": [
+      "src/**/*.ts"  // Include all .ts files in the src directory
+    ],
+    "exclude": [
+      "node_modules"  // Exclude the node_modules directory
+    ]
+  }
+  
