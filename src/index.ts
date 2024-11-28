@@ -1,13 +1,7 @@
 // src/index.ts
-
-import express, { Request, Response, NextFunction } from 'express';
-import morgan from 'morgan';
+import express, { Request, Response } from 'express';
 import winston from 'winston';
 
-const app = express();
-const port = process.env.PORT || 3000;
-
-// Initialize logger
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
@@ -18,18 +12,23 @@ const logger = winston.createLogger({
   ],
 });
 
-// Middleware
-app.use(morgan('combined'));
+const app = express();
+const port = process.env.PORT || 3000;
+
 app.use(express.json());
 
-// Error handling middleware
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  logger.error(err);
-  res.status(500).send('Internal Server Error');
+app.get('/', (req: Request, res: Response) => {
+  try {
+    res.send('Hello, TypeScript with Travis CI!');
+  } catch (error) {
+    logger.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, TypeScript with Travis CI!');
+app.use((err: any, req: Request, res: Response) => {
+  logger.error(err);
+  res.status(500).send('Internal Server Error');
 });
 
 app.listen(port, () => {
