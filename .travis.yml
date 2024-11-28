@@ -16,12 +16,10 @@ script:
   - npm run lint
   - npm run build
   - npm test
-  - npm run test:coverage
-
-# Optional: Set environment variables for the deployment
-env:
-  - NODE_ENV=development
+  - npm run coverage
 
 after_success:
-  - echo "Build passed!"
   - codecov
+
+env:
+  - NODE_ENV=development
